@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Enhanced HTML5 Form</title>
+  <meta name="description" content="Advanced HTML5 enhanced content demo: accessible form, media, lists, tables, and HTML5 validation." />
+  <style>
+    :root{
+      --bg:#0f172a; --card:#0b1220; --accent:#38bdf8; --muted:#94a3b8; --glass: rgba(255,255,255,0.03);
+    }
+    html,body{height:100%}
+    body{
+      margin:0; font-family:Inter,system-ui,Segoe UI,Roboto,'Helvetica Neue',Arial;
+      background: url('https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2072&q=80') no-repeat center center fixed;
+      background-size: cover;
+      color:#e6eef8; -webkit-font-smoothing:antialiased; padding:2rem;
+      line-height:1.45;
+    }
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(135deg, rgba(15, 23, 42, 0.9) 0%, rgba(7, 20, 40, 0.9) 60%);
+      z-index: -1;
+    }
+    .container{max-width:980px;margin:0 auto;background: rgba(11, 18, 32, 0.8); padding:1.5rem;border-radius:12px;box-shadow:0 8px 30px rgba(2,6,23,0.8); backdrop-filter: blur(10px);}
+    header h1{margin:.2rem 0;font-size:1.6rem}
+    header p{margin:.1rem 0 .9rem;color:var(--muted)}
+    nav ul{display:flex;gap:1rem;list-style:none;padding:0;margin:0}
+    nav a{color:var(--accent);text-decoration:none;font-weight:600}
+    main{display:grid;grid-template-columns:1fr 380px;gap:1rem}
+    .card{background:#071226;padding:1rem;border-radius:10px; box-shadow: 0 4px 15px rgba(0,0,0,0.3);}
+    .media img, .media video{max-width:100%;height:auto;border-radius:8px}
+    label{display:block;margin:.35rem 0;font-weight:600}
+    input,select,textarea{width:100%;padding:.5rem;border-radius:6px;border:1px solid rgba(255,255,255,0.1);background: rgba(15, 23, 42, 0.5);color:inherit; transition: all 0.3s ease;}
+    input:focus,select:focus,textarea:focus{outline:none;border-color:var(--accent);box-shadow:0 0 0 2px rgba(56, 189, 248, 0.2);}
+    fieldset{border:1px solid rgba(255,255,255,0.1);padding:.8rem;border-radius:8px;margin:.6rem 0}
+    legend{font-weight:700;padding:0 .5rem; color: var(--accent);}
+    .row{display:grid;grid-template-columns:1fr 1fr;gap:.6rem}
+    .full{grid-column:1/-1}
+    table{width:100%;border-collapse:collapse;margin-top:.6rem}
+    th,td{padding:.45rem;border:1px solid rgba(255,255,255,0.1);text-align:left}
+    .muted{color:var(--muted);font-size:.95rem}
+    footer{margin-top:1rem;font-size:.9rem;color:var(--muted)}
+    button{background:var(--accent);color:#06202a;border:none;padding:.6rem .9rem;border-radius:8px;font-weight:700;cursor:pointer; transition: all 0.3s ease;}
+    button:hover{background: #0ea5e9; transform: translateY(-2px);}
+    .small{font-size:.9rem;color:var(--muted)}
+    output {
+      display: inline-block;
+      margin-left: 10px;
+      font-weight: bold;
+      color: var(--accent);
+    }
+    meter {
+      width: 100%;
+      height: 1rem;
+      margin-top: 0.5rem;
+    }
+    @media (max-width:900px){ main{grid-template-columns:1fr} .row{grid-template-columns:1fr} }
+  </style>
+</head>
+<body>
+  <div class="container" role="main">
+    <header>
+      <nav aria-label="Primary">
+        <ul>
+          <li><a href="#form">Form</a></li>
+          <li><a href="#media">Media</a></li>
+          <li><a href="#table">Table</a></li>
+        </ul>
+      </nav>
+      <h1>Advanced HTML5 — Enhanced Form</h1>
+      <p class="muted">A single-file demo including semantic layout, form controls, lists, media, table, and HTML5 validation features.</p>
+    </header>
+
+    <main>
+      <section class="card" id="form" aria-labelledby="form-title">
+        <h2 id="form-title">Registration & Booking Form</h2>
+        <p class="small muted">All fields marked <strong>*</strong> are required. Try invalid input to see browser validation.</p>
+
+        <form id="enhancedForm" novalidate>
+          <fieldset>
+            <legend>Personal details</legend>
+            <div class="row">
+              <div>
+                <label for="fullname">Full name *</label>
+                <input id="fullname" name="fullname" type="text" placeholder="Jane Doe" required minlength="3" autocomplete="name" />
+              </div>
+
+              <div>
+                <label for="username">Username *</label>
+                <input id="username" name="username" type="text" placeholder="wess_w" required pattern="^[A-Za-z0-9_-]{3,20}$" title="3–20 chars: letters, numbers, _ or -" autocomplete="username"/>
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="email">Email *</label>
+                <input id="email" name="email" type="email" placeholder="you@example.com" required autocomplete="email"/>
+              </div>
+
+              <div>
+                <label for="phone">Phone</label>
+                <input id="phone" name="phone" type="tel" placeholder="+254700000000" pattern="^\+?[0-9\s\-()]{7,20}$" autocomplete="tel"/>
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="password">Password *</label>
+                <input id="password" name="password" type="password" minlength="8" required autocomplete="new-password" />
+              </div>
+
+              <div>
+                <label for="color">Favorite color</label>
+                <input id="color" name="color" type="color" value="#38bdf8" />
+              </div>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend>Booking details</legend>
+
+            <div class="row">
+              <div>
+                <label for="service">Service *</label>
+                <select id="service" name="service" required>
+                  <option value="">— choose —</option>
+                  <option>Site visit</option>
+                  <option>Consultation</option>
+                  <option>Full estimate</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="attendees">Attendees</label>
+                <input id="attendees" name="attendees" type="number" min="1" max="20" value="1" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="date">Date *</label>
+                <input id="date" name="date" type="date" required />
+              </div>
+
+              <div>
+                <label for="time">Time *</label>
+                <input id="time" name="time" type="time" required />
+              </div>
+            </div>
+
+            <div class="row">
+              <div>
+                <label for="budget">Estimated budget (KSh)</label>
+                <input id="budget" name="budget" type="range" min="1000" max="200000" value="25000" oninput="budgetOut.value=budget.value" />
+                <output id="budgetOut" name="budgetOut">25000</output>
+              </div>
+
+              <div>
+                <label for="priority">Priority</label>
+                <input id="priority" name="priority" type="number" min="1" max="5" value="3" />
+                <meter id="urgency" min="0" max="5" low="1" high="4" optimum="1" value="3">3 of 5</meter>
+              </div>
+            </div>
+
+            <label for="requirements">Project requirements</label>
+            <textarea id="requirements" name="requirements" rows="4" placeholder="Describe the scope, access notes, etc." aria-describedby="requirements-help"></textarea>
+            <div id="requirements-help" class="small muted">Use plain text; max 1000 chars enforced by browser if needed.</div>
+
+            <div class="row">
+              <div>
+                <label>Extras</label>
+                <div>
+                  <input id="contactEmail" name="contactMethod" type="radio" value="email" checked />
+                  <label for="contactEmail" class="small">Email</label>
+                </div>
+                <div>
+                  <input id="contactPhone" name="contactMethod" type="radio" value="phone" />
+                  <label for="contactPhone" class="small">Phone</label>
+                </div>
+              </div>
+
+              <div>
+                <label for="file">Upload reference (optional)</label>
+                <input id="file" name="file" type="file" accept=".pdf,image/*" />
+                <small class="small muted">PDF or images only (client-side accept hint).</small>
+              </div>
+            </div>
+
+          </fieldset>
+
+          <fieldset>
+            <legend>Preferences & verification</legend>
+            <label for="website">Website</label>
+            <input id="website" name="website" type="url" placeholder="https://example.com" autocomplete="url"/>
+
+            <label for="search">Search term</label>
+            <input id="search" name="search" type="search" placeholder="e.g. kitchen remodel" autocomplete="off"/>
+
+            <label for="city">City</label>
+            <input id="city" name="city" list="cities" placeholder="Type or choose..." />
+            <datalist id="cities">
+              <option value="Nairobi"></option>
+              <option value="Thika"></option>
+              <option value="Mombasa"></option>
+              <option value="Kisumu"></option>
+            </datalist>
+
+            <div style="margin-top:.6rem">
+              <input id="terms" name="terms" type="checkbox" required />
+              <label for="terms" class="small">I agree to the <a href="#policy" style="color:var(--accent)">terms & policy</a>. *</label>
+            </div>
+          </fieldset>
+
+          <div style="display:flex;gap:.6rem;align-items:center;margin-top:.6rem">
+            <button type="submit">Submit</button>
+            <button type="reset" id="resetBtn" style="background:transparent;border:1px solid rgba(255,255,255,0.1);color:var(--accent)">Reset</button>
+            <div class="small muted">Native validation will prevent invalid submission.</div>
+          </div>
+
+          <p class="small muted" style="margin-top:.4rem">Note: this demo uses HTML5 constraint validation. A tiny script below shows the submitted values in the preview panel.</p>
+        </form>
+
+        <section aria-live="polite" style="margin-top:1rem">
+          <h3>Client-side validation status</h3>
+          <div id="validationMsg" class="small muted">No submission yet.</div>
+        </section>
+      </section>
+
+      <!-- RIGHT COLUMN: preview, media, lists, table -->
+      <aside>
+        <div class="card" id="preview">
+          <h3>Submission preview</h3>
+          <pre id="previewArea" class="small muted" style="white-space:pre-wrap;max-height:320px;overflow:auto;padding:.4rem;background:rgba(0,0,0,0.15);border-radius:6px">No data submitted yet.</pre>
+        </div>
+
+        <div class="card media" id="media" style="margin-top:1rem">
+          <h3>Media</h3>
+          <figure>
+            <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Workspace setup example" style="width: 100%; height: 180px; object-fit: cover;" />
+            <figcaption class="small muted">Modern workspace setup.</figcaption>
+          </figure>
+
+          <h4 style="margin-top:.8rem">Intro video</h4>
+          <video controls playsinline aria-label="Project intro" style="border-radius:8px; width: 100%;">
+            <source src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4" type="video/mp4">
+            Your browser does not support the video element.
+          </video>
+        </div>
+
+        <div class="card" id="table" style="margin-top:1rem">
+          <h3>Data table</h3>
+          <p class="small muted">Example of a responsive table summarizing bookings.</p>
+          <table aria-describedby="table-desc">
+            <caption id="table-desc" class="small muted">Recent bookings (demo)</caption>
+            <thead>
+              <tr><th>Date</th><th>Client</th><th>Service</th><th>Status</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>2025-07-10</td><td>W. Gitau</td><td>Consultation</td><td>Completed</td></tr>
+              <tr><td>2025-07-14</td><td>A. Njeri</td><td>Site visit</td><td>Scheduled</td></tr>
+              <tr><td>2025-07-28</td><td>K. Otieno</td><td>Full estimate</td><td>Pending</td></tr>
+            </tbody>
+          </table>
+
+          <h4 style="margin-top:.6rem">Checklist</h4>
+          <ul>
+            <li>Semantic HTML & accessible labels</li>
+            <li>HTML5 validation (required, pattern, min/max)</li>
+            <li>Media elements & placeholder image</li>
+            <li>Form preview via JavaScript</li>
+          </ul>
+        </div>
+      </aside>
+    </main>
+
+    <footer class="muted" style="margin-top:1rem">
+      <p id="policy">Assignment: <strong>Advanced HTML5 — Enhancing Content</strong> — Single-file submission: <code>enhanced-form.html</code>.</p>
+    </footer>
+  </div>
+
+  <script>
+    // Small client-side script: uses Constraint Validation API & shows preview
+    (function(){
+      const form = document.getElementById('enhancedForm');
+      const preview = document.getElementById('previewArea');
+      const validationMsg = document.getElementById('validationMsg');
+
+      // Display budget output connected to range (initial)
+      const budget = document.getElementById('budget');
+      const budgetOut = document.getElementById('budgetOut');
+      if(budget && budgetOut){ budgetOut.value = budget.value; }
+
+      form.addEventListener('submit', function(e){
+        e.preventDefault(); // keep submission local for demo
+        if(!form.checkValidity()){
+          // browser will show native messages; we also show a message
+          validationMsg.textContent = 'Form contains errors — please correct highlighted fields.';
+          form.reportValidity();
+          return;
+        }
+
+        // collect form data
+        const fd = new FormData(form);
+        const obj = {};
+        for(const [k,v] of fd.entries()){
+          // show file name instead of blob
+          if(v instanceof File && v.name) obj[k] = v.name;
+          else obj[k] = v;
+        }
+        obj['submittedAt'] = new Date().toISOString();
+
+        preview.textContent = JSON.stringify(obj, null, 2);
+        validationMsg.textContent = 'Last submission succeeded: ' + new Date().toLocaleString();
+      });
+
+      // Reset preview on reset
+      form.addEventListener('reset', function(){ setTimeout(()=>{ preview.textContent='No data submitted yet.'; validationMsg.textContent='Form reset.'}, 10); });
+
+      // Live update of budget output (already covered by oninput attribute but ensure)
+      const budgetInput = document.getElementById('budget');
+      if(budgetInput){
+        budgetInput.addEventListener('input', function(){ document.getElementById('budgetOut').value = budgetInput.value; });
+      }
+    })();
+  </script>
+</body>
+</html>
